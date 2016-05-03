@@ -43,6 +43,9 @@ class ImportSomeData(Operator, ImportHelper):
     
 def register():
     bpy.utils.register_class(ImportSomeData)
+
+    # from . import pysrt
+
     print('registered alegre broc')
 
 def unregister():
