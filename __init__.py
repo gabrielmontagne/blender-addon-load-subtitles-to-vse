@@ -28,18 +28,31 @@ class ImportSubtitleFile(Operator, ImportHelper):
         )
 
     def execute(self, context):
+        scene = bpy.context.scene
+        fps = scene.render.fps
+
         sys.path.append(os.path.dirname(__file__))
         from .pysrt import open as srtopen
-        subtitles = srtopen(self.properties.filepath)
-
-        print('-' * 20)
-        pprint(subtitles)
 
         area = bpy.context.area
         old_type = area.type
         area.type = 'SEQUENCE_EDITOR'
-        bpy.ops.sequencer.effect_strip_add(frame_start=1, frame_end=20, type='TEXT')
-        bpy.context.scene.sequence_editor.active_strip.text = self.properties.filepath
+
+        subtitles = srtopen(self.properties.filepath)
+
+        for subtitle in subtitles:
+            frame_start = round(subtitle.start.ordinal * fps / 1000)
+            frame_end = round(subtitle.end.ordinal * fps / 1000)
+
+            print('--—' * 10)
+            print(subtitle.text, subtitle.start.ordinal, subtitle.end.ordinal)
+            print(subtitle.start)
+            print(frame_start, frame_end)
+
+            bpy.ops.sequencer.effect_strip_add(frame_start=frame_start,
+                    frame_end=frame_end, type='TEXT')
+            scene.sequence_editor.active_strip.text = subtitle.text
+
         area.type = old_type
         return {'FINISHED'}
 
