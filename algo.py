@@ -1,2 +1,0 @@
-def lalgo():
-    print('lalgo')
