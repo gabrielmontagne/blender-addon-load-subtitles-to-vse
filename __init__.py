@@ -1,9 +1,10 @@
-import bpy 
-from bpy_extras.io_utils import ImportHelper 
-from bpy.props import StringProperty, BoolProperty, EnumProperty 
-from bpy.types import Operator 
+from bpy.props import StringProperty
+from bpy.types import Operator
+from bpy_extras.io_utils import ImportHelper
 from pprint import pprint
-from . import loader 
+import bpy
+import os
+import sys
 
 bl_info = {
     'name': 'alegre brock',
@@ -17,21 +18,22 @@ bl_info = {
     'category': 'Sequencer'
     }
 
-class ImportSomeData(Operator, ImportHelper):
-    bl_idname = 'import_test.some_data'
-    bl_label = 'Import some data'
+class ImportSubtitleFile(Operator, ImportHelper):
+    bl_idname = 'import_test.subtitle_file'
+    bl_label = 'Import subtitle file into the Sequence Editor'
     filename_ext = '.srt'
-    filter_glob = StringProperty( 
-        default='*.srt', 
-        options={'HIDDEN'}, 
-        ) 
+    filter_glob = StringProperty(
+        default='*.srt',
+        options={'HIDDEN'},
+        )
+
     def execute(self, context):
-        print('execute')
-        loader.load_srt(self.properties.filepath)
-        pprint(self.properties.filepath)
-        pprint(dir(self.properties))
+        sys.path.append(os.path.dirname(__file__))
+        from .pysrt import open as srtopen
+        subtitles = srtopen(self.properties.filepath)
 
-
+        print('-' * 20)
+        pprint(subtitles)
 
         area = bpy.context.area
         old_type = area.type
@@ -40,17 +42,12 @@ class ImportSomeData(Operator, ImportHelper):
         bpy.context.scene.sequence_editor.active_strip.text = self.properties.filepath
         area.type = old_type
         return {'FINISHED'}
-    
+
 def register():
-    bpy.utils.register_class(ImportSomeData)
-
-    # from . import pysrt
-
-    print('registered alegre broc')
+    bpy.utils.register_class(ImportSubtitleFile)
 
 def unregister():
-    bpy.utils.unregister_class(ImportSomeData)
-    print('un registered alegre brock')
+    bpy.utils.unregister_class(ImportSubtitleFile)
 
 if __name__ == '__main__':
     register()
