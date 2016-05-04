@@ -11,7 +11,7 @@ bl_info = {
     'version': (0, 0, 2),
     'blender': (2, 77, 0),
     'location': 'VSE',
-    'description': 'aquel broc alegre',
+    'description': 'Adds a "import subtitle file into vse" operator',
     'wiki_url': 'http://www.tibas.london',
     'tracker_url': '',
     'category': 'Sequencer'
