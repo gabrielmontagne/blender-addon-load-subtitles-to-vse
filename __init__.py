@@ -6,7 +6,7 @@ import os
 import sys
 
 bl_info = {
-    'name': 'alegre brock',
+    'name': 'Link Text to VSE Text Strip',
     'author': 'gabriel@tibas.london',
     'version': (0, 0, 2),
     'blender': (2, 77, 0),
