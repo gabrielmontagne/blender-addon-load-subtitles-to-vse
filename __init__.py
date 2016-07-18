@@ -6,15 +6,15 @@ import os
 import sys
 
 bl_info = {
-    'name': 'Link Text to VSE Text Strip',
-    'author': 'gabriel@tibas.london',
+    'name': 'Load subtitles to VSE',
+    'author': 'gabriel montagné, gabriel@tibas.london',
     'version': (0, 0, 2),
     'blender': (2, 77, 0),
     'location': 'VSE',
     'description': 'Adds a "import subtitle file into vse" operator',
-    'wiki_url': 'http://www.tibas.london',
     'tracker_url': '',
     'category': 'Sequencer'
+    'tracker_url': 'https://bitbucket.org/gabriel.montagne/load-subtitles-to-vse/issues?status=new&status=open'
 }
 
 
