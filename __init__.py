@@ -12,8 +12,7 @@ bl_info = {
     'blender': (2, 77, 0),
     'location': 'VSE',
     'description': 'Adds a "import subtitle file into vse" operator',
-    'tracker_url': '',
-    'category': 'Sequencer'
+    'category': 'Sequencer',
     'tracker_url': 'https://bitbucket.org/gabriel.montagne/load-subtitles-to-vse/issues?status=new&status=open'
 }
 
