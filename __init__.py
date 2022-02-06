@@ -9,7 +9,7 @@ bl_info = {
     'name': 'Load subtitles to VSE',
     'author': 'gabriel montagné, gabriel@tibas.london',
     'version': (0, 0, 2),
-    'blender': (2, 77, 0),
+    'blender': (2, 83, 0),
     'location': 'VSE',
     'description': 'Adds a "import subtitle file into vse" operator',
     'category': 'Sequencer',
@@ -18,7 +18,7 @@ bl_info = {
 
 
 class ImportSubtitleFile(Operator, ImportHelper):
-    bl_idname = 'import_test.subtitle_file'
+    bl_idname = 'rojored.subtitle_file'
     bl_label = 'Import subtitle file into the Sequence Editor'
     filename_ext = '.srt'
     filter_glob = StringProperty(
@@ -28,7 +28,7 @@ class ImportSubtitleFile(Operator, ImportHelper):
 
     def execute(self, context):
         scene = bpy.context.scene
-        fps = scene.render.fps
+        fps = scene.render.fps / scene.render.fps_base
 
         sys.path.append(os.path.dirname(__file__))
         from .pysrt import open as srtopen
